@@ -1,0 +1,44 @@
+
+
+jms:
+  queue:
+    name: samplequeue
+
+kafka:
+  topic:
+    name: sampletopic
+
+
+spring:
+  kafka:
+    bootstrap-servers: PLAINTEXT://localhost:29092
+    client-id: mikembp
+    producer:
+      retries: 2
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+    consumer:
+      group-id: group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  activemq:
+    broker-url: failover://tcp://localhost:61616
+    user: admin
+    password: admin
+    send-timeout: 5s
+  jms:
+    listener:
+      auto-startup: true
+      concurrency: 1
+      acknowledge-mode: auto
+      max-concurrency: 1
+    cache:
+      enabled: true
+      producers: true
+      consumers: false
+      session-cache-size: 1
+    template:
+      receive-timeout: 5000
+      time-to-live: 5000
+
